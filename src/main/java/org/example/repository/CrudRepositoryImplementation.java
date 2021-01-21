@@ -32,13 +32,28 @@ public abstract class CrudRepositoryImplementation<T extends BaseEntity, ID exte
 
     @Override
     public T save(T entity) {
-        ID id = (ID) session.save(entity);
+        ID id = null;
+        try{
+            session.getTransaction().begin();
+            id = (ID) session.save(entity);
+            session.getTransaction().commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
         return get(id);
     }
 
     @Override
     public void delete(ID id) {
-        session.delete(get(id));
+        try {
+            session.getTransaction().begin();
+            session.delete(get(id));
+            session.getTransaction().commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
     }
 
 }
