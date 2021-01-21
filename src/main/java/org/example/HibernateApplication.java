@@ -11,7 +11,6 @@ public class HibernateApplication {
 
         SalesRepRepository salesRep = new SalesRepRepoImplementation();
 
-
         SalesReps one = new SalesReps("James", new Regions(1L));
         salesRep.save(one);
 
