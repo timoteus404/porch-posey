@@ -14,6 +14,5 @@ public class HibernateApplication {
         SalesReps one = new SalesReps("James", new Regions(1L));
         salesRep.save(one);
 
-
     }
 }
